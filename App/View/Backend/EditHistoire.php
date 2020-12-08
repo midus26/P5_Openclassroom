@@ -11,7 +11,7 @@
 			<input type="radio" name="sameImage" id="notsameImage" value="Non" />
 			<label for="notsameImage">Non</label>
 			<sup>Maximum 8Mo</sup>
-			<input type="file" name="Image" />
+			<input type="file" name="Image" id="Image"/>
 			<label for="altImage">Texte alternatif</label>
 			<input type="text" name="altImage" id="altImage" value="<?php echo $histoire['AltImage']; ?>" required/>
 			<label for="Annee">Année</label>

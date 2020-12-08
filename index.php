@@ -1,15 +1,19 @@
 <?php
+	
+	require('vendor/autoload.php');
+	use App\Controller\ASSCVM;
+	
 	session_start();
-	require("App/Controller/frontend.php");
 	
 try{
+		$monASSCVM = new ASSCVM();
 		if(isset($_GET['action'])):
 			
 			//ADMIN
 			
 			if($_GET['action'] == "Admin"):
 				if(isset($_SESSION['Droit']) && $_SESSION['Droit']):
-					ASSCVM::Administrateur();
+					$monASSCVM->Administrateur();
 				else:
 					throw new Exception("Vous ne disposez pas des droits d'acces");
 				endif;
@@ -18,18 +22,18 @@ try{
 			
 			//Acces aux articles
 			elseif($_GET['action'] == "Articles"):
-				ASSCVM::Articles();
+				$monASSCVM->Articles();
 			//Acces à un article
 			elseif($_GET['action'] == "article"):
 				if(isset($_GET['idArticle']) && intval($_GET['idArticle'])):
-					ASSCVM::Article(intval($_GET['idArticle']));
+					$monASSCVM->Article(intval($_GET['idArticle']));
 				else:
 					throw new Exception("Numero de l'article non transmis");
 				endif;
 			//Admin Ajout d'un article
 			elseif($_GET['action'] == "addArticle"):
 				if (isset($_SESSION['Droit']) && $_SESSION['Droit']):
-					ASSCVM::addArticle();
+					$monASSCVM->addArticle();
 				else:
 					throw new Exception("Vous ne disposez pas des droits d'acces");
 				endif;
@@ -38,7 +42,7 @@ try{
 				if (isset($_SESSION['Droit']) && $_SESSION['Droit']):
 					if(file_exists($_FILES['Image']['tmp_name'])):
 						if(!empty($_POST['altImage']) && !empty($_POST['Titre']) && !empty($_POST['Texte'])):
-							ASSCVM::addarticlePost();
+							$monASSCVM->addarticlePost();
 						else:
 							throw new Exception("Tous les champs ne sont pas remplis");
 						endif;
@@ -52,7 +56,7 @@ try{
 			elseif($_GET['action'] == "editArticle"):
 				if (isset($_SESSION['Droit']) && $_SESSION['Droit']):
 					if(isset($_GET['idArticle']) && intval($_GET['idArticle'])):
-						ASSCVM::editArticle(intval($_GET['idArticle']));
+						$monASSCVM->editArticle(intval($_GET['idArticle']));
 					else:
 						throw new Exception("Numero de l'article non transmis");
 					endif;
@@ -65,13 +69,14 @@ try{
 					if(isset($_GET['idArticle']) && intval($_GET['idArticle'])):
 						if(isset($_POST['sameImage']) && $_POST['sameImage'] == "Oui"):
 							if(!empty($_POST['altImage']) && !empty($_POST['Titre']) && !empty($_POST['Texte'])):
-								ASSCVM::editarticlePost($_POST['sameImage']);
+								$monASSCVM->editarticlePost($_POST['sameImage']);
 							else:
 								throw new Exception("Tous les champs ne sont pas remplis");
 							endif;
+						//Image à modifier
 						elseif(isset($_POST['sameImage']) && $_POST['sameImage'] == "Non"):
 							if(file_exists($_FILES['Image']['tmp_name']) && !empty($_POST['altImage']) && !empty($_POST['Titre']) && !empty($_POST['Texte'])):
-								ASSCVM::editarticlePost($_POST['sameImage']);
+								$monASSCVM->editarticlePost($_POST['sameImage']);
 							else:
 								throw new Exception("Aucune image transmis");
 							endif;
@@ -88,7 +93,7 @@ try{
 			elseif($_GET['action'] == "deleteArticle"):
 				if(isset($_SESSION['Droit']) && $_SESSION['Droit']):
 					if(isset($_GET['idArticle']) && intval($_GET['idArticle'])):
-						ASSCVM::deleteArticle();
+						$monASSCVM->deleteArticle();
 					else:
 						throw new Exception("Numero de l'article non transmis");
 					endif;
@@ -103,7 +108,7 @@ try{
 				if(isset($_GET['idArticle']) && intval($_GET['idArticle'])):
 					if(isset($_SESSION['Pseudo'])):
 						if(!empty($_POST['Message'])):
-							ASSCVM::addComment("article",$_GET['idArticle']);
+							$monASSCVM->addComment("article",$_GET['idArticle']);
 						else:
 							throw new Exception("Le contenu de votre commentaire est vide");
 						endif;
@@ -118,7 +123,7 @@ try{
 				if(isset($_GET['idEvent']) && intval($_GET['idEvent'])):
 					if(isset($_SESSION['Droit'])):
 						if(!empty($_POST['Message'])):
-							ASSCVM::addComment("event",$_GET['idEvent']);
+							$monASSCVM->addComment("event",$_GET['idEvent']);
 						else:
 							throw new Exception("Le contenu de votre commentaire est vide");
 						endif;
@@ -135,7 +140,7 @@ try{
 						//Si c'est un article
 						case "article" :
 							if(isset($_GET['idArticle']) && isset($_GET['idComment']) && intval($_GET['idArticle']) && intval($_GET['idComment'])):
-								ASSCVM::editComment($_GET['Section'],$_GET['idArticle'],$_GET['idComment']);
+								$monASSCVM->editComment($_GET['Section'],$_GET['idArticle'],$_GET['idComment']);
 							else:
 								throw new Exception("Identifiant Article/Commentaire non transmis");
 							endif;
@@ -143,7 +148,7 @@ try{
 						//Si c'est un evenement
 						case "event" :
 							if(isset($_GET['idEvent']) && isset($_GET['idComment']) && intval($_GET['idEvent']) && intval($_GET['idComment'])):
-								ASSCVM::editComment($_GET['Section'],$_GET['idEvent'],$_GET['idComment']);
+								$monASSCVM->editComment($_GET['Section'],$_GET['idEvent'],$_GET['idComment']);
 							else:
 								throw new Exception("Identifiant Evenenement/Commentaire non transmis");
 							endif;
@@ -163,8 +168,8 @@ try{
 						case "article" :
 							if(isset($_GET['idArticle']) && intval($_GET['idArticle'])):
 								if(!empty($_POST['Message'])):
-									ASSCVM::editcommentPost($_GET['idComment'],$_POST['Message']);
-									ASSCVM::Article($_GET['idArticle']);
+									$monASSCVM->editcommentPost($_GET['idComment'],$_POST['Message']);
+									$monASSCVM->Article($_GET['idArticle']);
 								else:
 									throw new Exception("Le contenu du commentaire est vide");
 								endif;
@@ -176,8 +181,8 @@ try{
 						case "event" :
 							if(isset($_GET['idEvent']) && intval($_GET['idEvent'])):
 								if(!empty($_POST['Message'])):
-									ASSCVM::editcommentPost($_GET['idComment'],$_POST['Message']);
-									ASSCVM::Event($_GET['idEvent']);
+									$monASSCVM->editcommentPost($_GET['idComment'],$_POST['Message']);
+									$monASSCVM->Event($_GET['idEvent']);
 								else:
 									throw new Exception("Le contenu du commentaire est vide");
 								endif;
@@ -195,26 +200,26 @@ try{
 			//Supprimer un commentaire
 			elseif($_GET['action'] == "deleteComment"):
 				if(isset($_GET['idComment']) && intval($_GET['idComment'])):
-					ASSCVM::deleteComment($_GET['idComment']);
+					$monASSCVM->deleteComment($_GET['idComment']);
 					//Redirection vers la page
 					switch($_GET['Section']){
 					case "article" :
 						if(isset($_GET['idArticle']) && intval($_GET['idArticle'])):
-							ASSCVM::Article($_GET['idArticle']);
+							$monASSCVM->Article($_GET['idArticle']);
 						else:
 							throw new Exception("Identifiant de l'article non transmis");
 						endif;
 					break;
 					case "event" :
 						if(isset($_GET['idEvent']) && intval($_GET['idEvent'])):
-							ASSCVM::Event($_GET['idEvent']);
+							$monASSCVM->Event($_GET['idEvent']);
 						else:
 							throw new Exception("Identifiant de l'evenement non transmis");
 						endif;
 					break;
 					case "Admin":
 						if(isset($_SESSION['Droit']) && $_SESSION['Droit']):
-							ASSCVM::Administrateur();
+							$monASSCVM->Administrateur();
 						else:
 							throw new Exception("Vous ne disposez pas des droit d'acces");
 						endif;
@@ -229,14 +234,14 @@ try{
 			//Signaler
 			elseif($_GET['action'] == "signalComment"):
 				if(isset($_GET['idComment']) && intval($_GET['idComment'])):
-					ASSCVM::signalComment($_GET['idComment']);
+					$monASSCVM->signalComment($_GET['idComment']);
 					//Redirection vers la page
 					switch($_GET['Section']){
 					case "article" :
-						ASSCVM::Article(intval($_GET['idArticle']));
+						$monASSCVM->Article(intval($_GET['idArticle']));
 					break;
 					case "event" :
-						ASSCVM::Event(intval($_GET['idEvent']));
+						$monASSCVM->Event(intval($_GET['idEvent']));
 					break;
 					default :
 						throw new Exception("Redirection non transmis");
@@ -249,7 +254,7 @@ try{
 			elseif($_GET['action'] == "restoreComment"):
 				if(isset($_SESSION['Droit']) && $_SESSION['Droit']):
 					if(isset($_GET['idComment']) && intval($_GET['idComment'])):
-						ASSCVM::restoreComment();
+						$monASSCVM->restoreComment();
 					else:
 						throw new Exception("Identifiant du commentaire non transmis");
 					endif;
@@ -261,27 +266,27 @@ try{
 			
 			//Acces page de connexion/deconnexion
 			elseif($_GET['action'] == 'Connexion'):
-				ASSCVM::Connexion();
+				$monASSCVM->Connexion();
 			//Verification de connexion
 			elseif($_GET['action'] == 'checkConnexion'):
 				if(!empty($_POST['Pseudo']) && !empty($_POST['Password'])):
-					ASSCVM::connexionCheck();
+					$monASSCVM->connexionCheck();
 				else:
 					throw new Exception("Tous les champs ne sont pas remplis");
 				endif;
 			//Deconnexion de l'utilisateur
 			elseif($_GET['action'] == "Disconnect"):
-				ASSCVM::Deconnexion();
+				$monASSCVM->Deconnexion();
 			//Inscription du nouvel utilisateur
 			elseif($_GET['action'] == "Inscription"):
 				if(!empty($_POST['Pseudo']) && !empty($_POST['Password']) && !empty($_POST['PasswordCheck'])):
 					if($_POST['Password'] != $_POST['PasswordCheck']):
 						throw new Exception("Vous n'avez pas saisie le meme mot de passe");
 					else:
-						if(ASSCVM::VerifPseudo($_POST['Pseudo'])):
+						if($monASSCVM->VerifPseudo($_POST['Pseudo'])):
 							throw new Exception("Pseudo déjà utilisé");
 						else:
-							ASSCVM::Inscription();
+							$monASSCVM->Inscription();
 						endif;
 					endif;
 				else:
@@ -290,25 +295,25 @@ try{
 			//EVENEMENT
 			elseif($_GET['action'] == "event"):
 				if(isset($_GET['idEvent']) && intval($_GET['idEvent'])):
-					ASSCVM::event($_GET['idEvent']);
+					$monASSCVM->event($_GET['idEvent']);
 				else:
 					throw new Exception("Numero de l'event non transmis");
 				endif;
 			elseif($_GET['action'] == "addEvent"):
 				if(isset($_SESSION['Droit']) && $_SESSION['Droit']):
-					ASSCVM::addEvent();
+					$monASSCVM->addEvent();
 				else:
 					throw new Exception("Vous ne disposez pas des droits d'acces");
 				endif;
 				//Acces page des evenement
 			elseif($_GET['action'] == 'Evenement'):
-				ASSCVM::Events();
+				$monASSCVM->Events();
 			//verification pour ajouter un evenement
 			elseif($_GET['action'] == "addeventPost"):
 				if(isset($_SESSION['Droit']) && $_SESSION['Droit']):
 					if(file_exists($_FILES['Image']['tmp_name'])):
 						if(!empty($_POST['altImage']) && !empty($_POST['Lieu']) && !empty($_POST['Titre']) && !empty($_POST['Texte']) && !empty($_POST['DateDebut']) && !empty($_POST['DateFin']) && !empty($_POST['TimeStart']) && !empty($_POST['TimeEnd'])):
-							ASSCVM::addeventPost();
+							$monASSCVM->addeventPost();
 						else:
 							throw new Exception("Tous les champs ne sont pas remplis");
 						endif;
@@ -322,7 +327,7 @@ try{
 			elseif($_GET['action'] == "editEvent"):
 				if(isset($_SESSION['Droit']) && $_SESSION['Droit']):
 					if(isset($_GET['idEvent']) && intval($_GET['idEvent'])):
-						ASSCVM::editEvent(intval($_GET['idEvent']));
+						$monASSCVM->editEvent(intval($_GET['idEvent']));
 					else:
 						throw new Exception("Identifiant de l'evenement à modifier non transmis");
 					endif;
@@ -335,13 +340,13 @@ try{
 					if(isset($_GET['idEvent']) && intval($_GET['idEvent'])):
 						if(isset($_POST['sameImage']) && $_POST['sameImage'] == "Oui"):
 							if(!empty($_POST['altImage']) && !empty($_POST['DateDebut']) && !empty($_POST['DateFin'])  && !empty($_POST['TimeStart']) && !empty($_POST['TimeEnd']) && !empty($_POST['Lieu']) && !empty($_POST['Titre']) && !empty($_POST['Texte'])):
-								ASSCVM::editeventPost($_POST['sameImage']);
+								$monASSCVM->editeventPost($_POST['sameImage']);
 							else:
 								throw new Exception("Tous les champs ne sont pas remplis");
 							endif;
 						elseif(isset($_POST['sameImage']) && $_POST['sameImage'] == "Non"):
 							if(file_exists($_FILES['Image']['tmp_name'])):
-								ASSCVM::editeventPost($_POST['sameImage']);
+								$monASSCVM->editeventPost($_POST['sameImage']);
 							else:
 								throw new Exception("Aucune image sélectionner");
 							endif;
@@ -358,7 +363,7 @@ try{
 			elseif($_GET['action'] == "deleteEvent"):
 				if(isset($_SESSION['Droit']) && $_SESSION['Droit']):
 					if(isset($_GET['idEvent']) && intval($_GET['idEvent'])):
-						ASSCVM::deleteEvent();
+						$monASSCVM->deleteEvent();
 					else:
 						throw new Exception("Numero de l'event non transmis");
 					endif;
@@ -368,11 +373,11 @@ try{
 			//HISTOIRE
 			//Acces page de l'histoire de l'association
 			elseif($_GET['action'] == 'Histoire'):
-				ASSCVM::Histoires();
+				$monASSCVM->Histoires();
 			//Ajout d'un article de l'histoire
 			elseif($_GET['action'] == "addHistoire"):
 				if(isset($_SESSION['Droit']) && $_SESSION['Droit']):
-					ASSCVM::addHistoire();
+					$monASSCVM->addHistoire();
 				else:
 					throw new Exception("Vous ne disposez pas des droits d'acces");
 				endif;
@@ -381,7 +386,7 @@ try{
 				if(isset($_SESSION['Droit']) && $_SESSION['Droit']):
 					if(file_exists($_FILES['Image']['tmp_name'])):
 						if(!empty($_POST['altImage']) && !empty($_POST['Annee']) && !empty($_POST['Titre']) && !empty($_POST['Texte'])):
-							ASSCVM::addhistoirePost();
+							$monASSCVM->addhistoirePost();
 						else:
 							throw new Exception("Tous les champs ne sont pas remplis");
 						endif;
@@ -395,7 +400,7 @@ try{
 			elseif($_GET['action'] == "editHistoire"):
 				if(isset($_SESSION['Droit']) && $_SESSION['Droit']):
 					if(isset($_GET['idHistoire']) && intval($_GET['idHistoire'])):
-						ASSCVM::editHistoire(intval($_GET['idHistoire']));
+						$monASSCVM->editHistoire(intval($_GET['idHistoire']));
 					else:
 						throw new Exception("Identifiant de l'histoire non transmis");
 					endif;
@@ -407,13 +412,13 @@ try{
 					if(isset($_GET['idHistoire']) && intval($_GET['idHistoire'])):
 						if(isset($_POST['sameImage']) && $_POST['sameImage'] == 'Oui'):
 							if(!empty($_POST['altImage']) && isset($_POST['Annee']) && !empty($_POST['Titre']) && !empty($_POST['Texte'])):
-								ASSCVM::edithistoirePost($_POST['sameImage']);
+								$monASSCVM->edithistoirePost($_POST['sameImage']);
 							else:
 								throw new Exception("Tous les champs ne sont pas remplis");
 							endif;
 						elseif(isset($_POST['sameImage']) && $_POST['sameImage'] == 'Non'):
 							if(file_exists($_FILES['Image']['tmp_name']) && !empty($_POST['altImage']) && isset($_POST['Annee']) && !empty($_POST['Titre']) && !empty($_POST['Texte'])):
-								ASSCVM::edithistoirePost($_POST['sameImage']);
+								$monASSCVM->edithistoirePost($_POST['sameImage']);
 							else:
 								throw new Exception("Image non transmis");
 							endif;
@@ -430,7 +435,7 @@ try{
 			elseif($_GET['action'] == "deleteHistoire"):
 				if(isset($_SESSION['Droit']) && $_SESSION['Droit']):
 					if(isset($_GET['idHistoire']) && intval($_GET['idHistoire'])):
-						ASSCVM::deleteHistoire($_GET['idHistoire']);
+						$monASSCVM->deleteHistoire($_GET['idHistoire']);
 					else:
 						throw new Exception("Numero de l'histoire non transmis");
 					endif;
@@ -439,14 +444,14 @@ try{
 				endif;
 			//Acces page des différents monuments
 			elseif($_GET['action'] == 'Sites'):
-				ASSCVM::Sites();
+				$monASSCVM->Sites();
 			endif;
 		//Page d'accueil (par defaut)
 		else:
-			ASSCVM::ListBillets();
+			$monASSCVM->ListBillets();
 		endif;
 }
 catch(\Exception $e){
 
-	ASSCVM::Erreur($e->getMessage());
+	$monASSCVM->Erreur($e->getMessage());
 }

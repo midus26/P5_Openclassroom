@@ -11,7 +11,7 @@
 				<input type="radio" name="sameImage" id="notsameImage" value="Non" />
 				<label for="notsameImage">Non</label>
 			<sup>Maximum 8Mo</sup>
-			<input type="file" name="Image" />
+			<input type="file" name="Image" id="Image"/>
 			<label for="altImage">Texte alternatif</label>
 			<input type="text" name="altImage" id="altImage" value="<?php echo $event['AltImage'] ?>" required/>
 			<label for="DateDebut">Date du début de l'evenement</label>

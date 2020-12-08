@@ -3,7 +3,7 @@
 	<h2>Ajout d'un article</h2>
 	<form method="post" enctype="multipart/form-data" action="index.php?action=addarticlePost">
 	<sup>Maximum 8Mo</sup>
-		<input type="file" name="Image" />
+		<input type="file" name="Image" id="Image"/>
 		<label for="altImage">Texte alternatif</label>
 		<input type="text" name="altImage" id="altImage" required/>
 		<label for="Titre">Titre</label>

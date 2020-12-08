@@ -38,7 +38,7 @@
 		<?php } ?>
 	</div>
 	<h3>Evenement à venir</h3>
-	<?php if($NbrpaginationArticle > 1){ ?>
+	<?php if($NbrpaginationEvent > 1){ ?>
 		<div id="Pagination">
 		<?php echo "<ul>"; ?>
 			<?php for($i=1;$i<=$NbrpaginationEvent;$i++){

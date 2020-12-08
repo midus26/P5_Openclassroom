@@ -5,6 +5,10 @@ class Ctrl{
 		let inputTexte = document.getElementById("Texte");
 		let btnSubmit = document.getElementById("AdminBtn");
 		
+		let inputsameImg = document.getElementById("sameImage");
+		let inputnotsameImg = document.getElementById("notsameImage");
+		let inputImage = document.getElementById("Image");
+		
 		btnSubmit.addEventListener("click", function(){
 			if(inputaltImage.value == ""){
 				alert("Le fomulaire AltImage n'est pas remplis");
@@ -16,6 +20,17 @@ class Ctrl{
 				alert("Le fomulaire Texte n'est pas remplis");
 			}	
 		});
+		if(inputsameImg != null){
+			if(inputsameImg.value = "Oui"){
+				inputImage.style.display = "none";
+			}
+			inputsameImg.addEventListener('click', function (){
+				inputImage.style.display = "none";
+			});
+			inputnotsameImg.addEventListener('click', function (){
+				inputImage.style.display = "flex";
+			});
+		}
 	};
 };
 let maCtrl = new Ctrl();
