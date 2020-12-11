@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+<html lang="fr">
 	<head>
+		<title>ASSCVM</title>
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width"/>
 		<link rel="icon" href="App/Public/Image/Icone/icone.jpg" />

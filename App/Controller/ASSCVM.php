@@ -1,14 +1,14 @@
 <?php
 	namespace App\Controller;
 	require('vendor/autoload.php');
-
+	
 	use App\Model\BilletsManager;
 	use App\Model\ClientManager;
 	use App\Model\CommentManager;
 	use App\Model\EventManager;
 	use App\Model\HistoireManager;
 	use App\Model\ImageManager;
-	
+
 class ASSCVM{
 	static function ListBillets()
 	{
@@ -72,6 +72,9 @@ class ASSCVM{
 		$Events = $eventManager->selectEvents();
 		require("App/View/Frontend/Evenements.php");
 	}
+	
+	//CONNEXION/INSCRIPTION
+	
 	static function Connexion()
 	{
 		require("App/View/Frontend/Connexion.php");
@@ -82,14 +85,18 @@ class ASSCVM{
 		if($clientManager->VerifPseudo($_POST['Pseudo'])):
 			$clientManager->checkConnexion();
 		else:
-			throw new Exception("Aucun utilisateur connu sous ce pseudo");
+			throw new \Exception("Aucun utilisateur connu sous ce pseudo");
 		endif;
 		require("App/View/Frontend/Connexion.php");
 	}
-	static function inscription()
+	static function Inscription()
 	{
 		$clientManager = new ClientManager();
-		$Client = $clientManager->addClient();
+			if($clientManager->VerifPseudo($_POST['Pseudo'])):
+				throw new \Exception("Pseudo déjà utilisé");
+			else:
+				$Client = $clientManager->addClient();
+			endif;
 		require("App/View/Frontend/Connexion.php");
 	}
 	static function Deconnexion()
@@ -128,13 +135,13 @@ class ASSCVM{
 						$imageManager->addImg($date,'Article',$_FILES['Image']);
 						$billetsManager->addBillet($date,$_POST['Titre'],$_FILES['Image'],$_POST['altImage'],$_POST['Texte']);
 					else:
-						throw new Exception("L'extension de l'image est invalide");
+						throw new \Exception("L'extension de l'image est invalide");
 					endif;
 				else:
-					throw new Exception("Image trop lourde pour être transmis");
+					throw new \Exception("Image trop lourde pour être transmis");
 				endif;
 			else:
-				throw new Exception("Erreur sur l'image");
+				throw new \Exception("Erreur sur l'image");
 			endif;
 		header('Location: index.php?action=Admin');
 	}
@@ -163,18 +170,18 @@ class ASSCVM{
 							$imageManager->addImg($date,"Article",$_FILES['Image']);
 							$Billets = $billetsManager->editBillet($date,$_FILES['Image'],$_POST['altImage'],$_POST['Titre'],$_POST['Texte'],$_GET['idArticle']);
 						else:
-							throw new Exception("L'extension de l'image est incorrect");
+							throw new \Exception("L'extension de l'image est incorrect");
 						endif;
 					else:
-						throw new Exception("Image trop lourde pour être transmis");
+						throw new \Exception("Image trop lourde pour être transmis");
 					endif;
 				else:
-					throw new Exception("Erreur sur l'image");
+					throw new \Exception("Erreur sur l'image");
 				endif;
 			header('Location: index.php?action=Admin');
 		}
 		else{
-			throw new Exception("Aucune des 2 possibilité pour conserver l'image n'est choisi");
+			throw new \Exception("Aucune des 2 possibilité pour conserver l'image n'est choisi");
 		}
 	}
 	static function deleteArticle()
@@ -220,7 +227,7 @@ class ASSCVM{
 				$References = $eventManager->selectEvent($IdRef);
 			break;
 			default:
-				throw new Exception("Erreur de la section de redirection");
+				throw new \Exception("Erreur de la section de redirection");
 			break;
 		}
 		require("App/View/Frontend/Commentaire.php");
@@ -266,13 +273,13 @@ class ASSCVM{
 					$event = $eventManager->addEvent($date,$_FILES['Image'],$_POST['altImage'],$_POST['Lieu'],$_POST['Titre'],$_POST['Texte'],$_POST['DateDebut'],$_POST['DateFin'],$_POST['TimeStart'],$_POST['TimeEnd']);
 					header('Location: index.php?action=Admin');
 				else:
-					throw new Exception("L'extension de l'image est invalide");
+					throw new \Exception("L'extension de l'image est invalide");
 				endif;
 			else:
-				throw new Exception("Image trop lourde pour être transmis");
+				throw new \Exception("Image trop lourde pour être transmis");
 			endif;
 		else:
-			throw new Exception("Erreur sur l'image");
+			throw new \Exception("Erreur sur l'image");
 		endif;
 	}
 	static function editEvent($idEvent)
@@ -301,16 +308,16 @@ class ASSCVM{
 						$Events = $eventManager->editeventPost($date,intval($_GET['idEvent']),$_FILES['Image'],$_POST['altImage'],$_POST['Lieu'],$_POST['Titre'],$_POST['Texte'],$_POST['DateDebut'],$_POST['DateFin'],$_POST['TimeStart'],$_POST['TimeEnd']);
 						header('Location: index.php?action=Admin');
 					else:
-						throw new Exception("L'extension de l'image incorrect");
+						throw new \Exception("L'extension de l'image incorrect");
 					endif;
 				else:
-					throw new Exception("Image trop lourde pour être transmise");
+					throw new \Exception("Image trop lourde pour être transmise");
 				endif;
 			else:
-				throw new Exception("Erreur sur l'image");
+				throw new \Exception("Erreur sur l'image");
 			endif;
 		else:
-			throw new Exception("Aucune des 2 possibilité pour conserver l'image n'est choisi");
+			throw new \Exception("Aucune des 2 possibilité pour conserver l'image n'est choisi");
 		endif;
 	}
 	static function deleteEvent()
@@ -342,13 +349,13 @@ class ASSCVM{
 					$histoireManager->addHistoire($date,$_FILES['Image'],$_POST['altImage'],$_POST['Annee'],$_POST['Titre'],$_POST['Texte']);
 					header('Location: index.php?action=Admin');
 				else:
-					throw new Exception("Extension de l'image incorrect");
+					throw new \Exception("Extension de l'image incorrect");
 				endif;
 			else:
-				throw new Exception("Image trop lourde pour être transmis");
+				throw new \Exception("Image trop lourde pour être transmis");
 			endif;
 		else:
-			throw new Exception("Erreur sur l'image");
+			throw new \Exception("Erreur sur l'image");
 		endif;
 	}
 	static function editHistoire($idHistoire)
@@ -377,16 +384,16 @@ class ASSCVM{
 						$histoireManager->edithistoirePost($date,$_GET['idHistoire'],$_FILES['Image'],$_POST['altImage'],$_POST['Annee'],$_POST['Titre'],$_POST['Texte']);
 						header('Location: index.php?action=Admin');
 					else:
-						throw new Exception("Extension de l'image incorrect");
+						throw new \Exception("Extension de l'image incorrect");
 					endif;
 				else:
-					throw new Exception("Taille de l'image trop importante");
+					throw new \Exception("Taille de l'image trop importante");
 				endif;
 			else:
-				throw new Exception("Erreur sur l'image transmise");
+				throw new \Exception("Erreur sur l'image transmise");
 			endif;
 		else:
-			throw new Exception("Default sur la conservation de l'image");
+			throw new \Exception("Default sur la conservation de l'image");
 		endif;
 	}
 	static function deleteHistoire($idHistoire)

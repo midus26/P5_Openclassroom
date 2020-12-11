@@ -1,6 +1,7 @@
 <?php
 	namespace App\Model;
 	require('vendor/autoload.php');
+	
 	use App\Model\Manager;
 	
 class ClientManager extends Manager
@@ -31,7 +32,7 @@ class ClientManager extends Manager
 
 		if (!$resultat)
 		{
-			throw new Exception("Erreur de connexion");
+			throw new \Exception("Erreur de connexion");
 		}
 		else
 		{
@@ -41,7 +42,7 @@ class ClientManager extends Manager
 				$_SESSION['Droit'] = $resultat['Droit'];
 			}
 			else {
-				throw new Exception('Mauvais identifiant ou mot de passe !');
+				throw new \Exception('Mauvais identifiant ou mot de passe !');
 			}
 		}
 	}

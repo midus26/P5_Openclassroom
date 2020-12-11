@@ -20,6 +20,7 @@
 			$billet->execute(array($idBillet));
 			return $billet;
 		}
+		//Pagination des billets
 		public function selectbilletLimit($Debut,$NbrarticlePage)
 		{
 			$bdd = $this->bddConnect();

@@ -22,7 +22,7 @@
 	<form method="post" action="index.php?action=addcommentaireEvent&amp;idEvent=<?php echo $_GET['idEvent']; ?>">
 		<label for="Message"></label>
 		<input type="text" name="Message" id="Message" required/>
-		<button class="AdminBtn" type="submit">Envoyer</button>
+		<button id="AdminBtn" type="submit">Envoyer</button>
 	</form>
 	<?php } ?>
 	<h4>Liste des commentaires</h4>
@@ -41,5 +41,6 @@
 			</div>
 		</div>
 	<?php } ?>
+	<script src="App/Public/Js/CtrlComment.js"></script>
 <?php $content = ob_get_clean(); ?>
 <?php require("template.php");

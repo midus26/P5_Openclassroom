@@ -15,7 +15,7 @@
 	<form method="post" action="index.php?action=addcommentaireArticle&amp;idArticle=<?php echo $_GET['idArticle']; ?>">
 		<label for="Message">Commentaire</label>
 		<input type="text" name="Message" id="Message" required/>
-		<button class="AdminBtn" type="submit">Envoyer</button>
+		<button id="AdminBtn" type="submit">Envoyer</button>
 	</form>
 	<?php }else{ ?>
 		<p>Vous devez être connecter pour poster un commentaire</p>
@@ -36,5 +36,6 @@
 			</div>
 		</div>
 	<?php } ?>
+	<script src="App/Public/Js/CtrlComment.js"></script>
 <?php $content = ob_get_clean(); ?>
 <?php require("template.php");

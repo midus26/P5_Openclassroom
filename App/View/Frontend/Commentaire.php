@@ -31,9 +31,10 @@
 		&amp;idComment=<?php echo $commentaire['Id']; ?>">
 			<label for="Message">Commentaire</label>
 			<input type="text" name="Message" id="Message" value="<?php echo $commentaire['Message']; ?>" required/>
-			<button class="AdminBtn" type="submit">Modifier</button>
+			<button id="AdminBtn" type="submit">Modifier</button>
 		</form>
 	<?php } ?>
 	<?php endif; ?>
+	<script src="App/Public/Js/CtrlComment.js"></script>
 <?php $content = ob_get_clean(); ?>
 <?php require("template.php");

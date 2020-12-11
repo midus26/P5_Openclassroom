@@ -283,11 +283,7 @@ try{
 					if($_POST['Password'] != $_POST['PasswordCheck']):
 						throw new Exception("Vous n'avez pas saisie le meme mot de passe");
 					else:
-						if($monASSCVM->VerifPseudo($_POST['Pseudo'])):
-							throw new Exception("Pseudo déjà utilisé");
-						else:
-							$monASSCVM->Inscription();
-						endif;
+						$monASSCVM->Inscription();
 					endif;
 				else:
 					throw new Exception("Tous les champs ne sont pas remplis");

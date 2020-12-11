@@ -10,18 +10,22 @@ class Ctrl{
 		let inputnotsameImg = document.getElementById("notsameImage");
 		let inputImage = document.getElementById("Image");
 		
-		btnSubmit.addEventListener("click", function(){
+		btnSubmit.addEventListener("click", function(e){
 			if(inputaltImage.value == ""){
 				alert("Le fomulaire AltImage n'est pas remplis");
+				e.preventDefault();
 			}
 			if(inputAnnee.value == ""){
 				alert("Le fomulaire Annee n'est pas remplis");
+				e.preventDefault();
 			}
 			if(inputTitre.value == ""){
 				alert("Le formulaire Titre n'est pas remplis");
+				e.preventDefault();
 			}
 			if(inputTexte.value == ""){
 				alert("Le fomulaire Texte n'est pas remplis");
+				e.preventDefault();
 			}	
 		});
 		

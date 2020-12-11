@@ -7,7 +7,7 @@
 		public function ctrlsizeImg($Image)
 		{
 			$File = false;
-			if($Image['size'] <= 1000000):
+			if($Image['size'] <= 8000000):
 				$File = true;
 			else:
 				$File = false;
