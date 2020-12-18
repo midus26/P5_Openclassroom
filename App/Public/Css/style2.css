@@ -1,21 +1,7 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
-
 body{
 	max-width : 100%;
 	text-align : center;
 	background-color: RGB(175, 218, 255);
-}
-#Container{
-	word-break : break-word;
-	max-width : 100%;
-}
-#Introduction{
-	text-align : center;
 }
 #En-tete{
 	margin-bottom : 15px;
@@ -31,23 +17,16 @@ body{
 	color : white;
 }
 #Raccourci{
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-pack : justify;
-	    -ms-flex-pack : justify;
-	        justify-content : space-between;
+	justify-content : space-between;
 	margin : auto;
 	padding : 10px;
 	border : solid antiquewhite;
 	border-radius : 5px;
 	background-color : white;
-	-ms-flex-wrap : wrap;
-	    flex-wrap : wrap;
+	flex-wrap : wrap;
 }
 li{
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
 	text-decoration : none;
 }
@@ -70,13 +49,8 @@ h2,h3,h4{
 }
 form{
 	width : 80%;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	flex-direction : column;
 	margin : auto;
 }
 input{
@@ -87,7 +61,6 @@ table,tr,th,td{
 	text-align : center;
 	background-color : antiquewhite;
 	margin : auto;
-	word-break : break-word;
 }
 th{
 	background-color : white;
@@ -123,25 +96,14 @@ textarea{
 #ListeArticles{
 	width : 90%;
 	margin : auto;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-ms-flex-pack : distribute;
-	    justify-content : space-around;
-	-ms-flex-wrap : wrap;
-	    flex-wrap : wrap;
+	justify-content : space-around;
+	flex-wrap : wrap;
 }
 .resumeArticle{
-	width : -webkit-max-content;
-	width : -moz-max-content;
 	width : max-content;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	flex-direction : column;
 	margin : 15px;
 	text-align : center;
 	border-radius : 15px;
@@ -149,16 +111,9 @@ textarea{
 	padding : 15px;
 }
 .resumeArticle:hover{
-	width : -webkit-max-content;
-	width : -moz-max-content;
 	width : max-content;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	flex-direction : column;
 	margin : 15px;
 	text-align : center;
 	border-radius : 15px;
@@ -176,44 +131,27 @@ textarea{
 	padding : 15px;
 }
 #ListeEvents{
+	width : 90%;
 	margin : auto;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-ms-flex-pack : distribute;
-	    justify-content : space-around;
-	-ms-flex-wrap : wrap;
-	    flex-wrap : wrap;
+	justify-content : space-around;
+	flex-wrap : wrap;
 }
 .resumeEvent:hover{
-	height : -webkit-max-content;
-	height : -moz-max-content;
 	height : max-content;
 	max-width : 50%;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	flex-direction : column;
 	margin : 15px;
 	text-align : center;
 	border-radius : 15px;
 	background-color : #fda32ab5;
 }
 .resumeEvent{
-	height : -webkit-max-content;
-	height : -moz-max-content;
 	height : max-content;
 	max-width : 50%;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	flex-direction : column;
 	margin : 15px;
 	text-align : center;
 	border-radius : 15px;
@@ -226,8 +164,6 @@ textarea{
 }
 #Pagination ,ul{
 	padding : 0;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
 	margin : auto;
 	font-weight : bold;
@@ -255,13 +191,8 @@ textarea{
 }
 .Article{
 	width : 80%;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	flex-direction : column;
 	margin : 15px auto 15px auto;
 	text-align : center;
 	background-color : antiquewhite;
@@ -281,8 +212,6 @@ textarea{
 	max-height : 500px;
 }
 .Commentaire{
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
 	margin : auto;
 	max-width : 300px;
@@ -295,25 +224,15 @@ textarea{
 	max-height : 500px;
 }
 .ContenuComment{
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	flex-direction : column;
 	text-align : center;
 	width : 80%;
 	margin : auto;
 }
 .IconeComments{
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	flex-direction : column;
 }
 .IconeComment{
 	max-width : 50px;
@@ -323,13 +242,8 @@ textarea{
 }
 .Event{
 	width : 80%;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	flex-direction : column;
 	margin : 15px auto 15px auto;
 	text-align : center;
 	background-color : antiquewhite;
@@ -337,41 +251,34 @@ textarea{
 }
 .Histoire{
 	width : 80%;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	flex-direction : column;
 	margin : 15px auto 15px auto;
 	text-align : center;
 	background-color : antiquewhite;
 	border-radius : 15px;
 }
+#Container{
+	width : 100%;
+	word-break : break-word;
+	max-width : 100%;
+}
+#Introduction{
+	text-align : center;
+}
 #flexChapelle{
 	width : 100%;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-ms-flex-pack : distribute;
-	    justify-content : space-around;
+	justify-content : space-around;
 	margin-bottom : 15px;
-	-ms-flex-wrap : wrap;
-	    flex-wrap : wrap;
+	flex-wrap : wrap;
 }
 #ListeArticlesColonne{
 	width : 90%;
 	margin : auto;
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-ms-flex-pack : distribute;
-	    justify-content : space-around;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	justify-content : space-around;
+	flex-direction : column;
 }
 .ImgArticle{
 	max-width : 150px;
@@ -383,12 +290,8 @@ textarea{
 	max-width : 50px;
 }
 #AdminAjout{
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	flex-wrap : wrap;
-	-ms-flex-pack : distribute;
-	    justify-content : space-around;
+	justify-content : space-around;
 }
 .AdminBtn{
 	margin : auto;
@@ -423,13 +326,8 @@ textarea{
 	background-color : black;
 }
 .Chapelle{
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	flex-direction : column;
 	margin : 15px auto 15px auto;
 	padding : 5px;
 	border-radius : 15px;
@@ -467,56 +365,17 @@ textarea{
 }
 /*METEO*/
 #Meteo{
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
 	margin : auto;
-	-ms-flex-pack : distribute;
-	    justify-content : space-around;
-	-ms-flex-wrap : wrap;
-	    flex-wrap : wrap;
+	justify-content : space-around;
+	flex-wrap : wrap;
 }
 .MeteoJour{
-	display : -webkit-box;
-	display : -ms-flexbox;
 	display : flex;
-	-webkit-box-orient : vertical;
-	-webkit-box-direction : normal;
-	    -ms-flex-direction : column;
-	        flex-direction : column;
+	flex-direction : column;
 	padding : 15px;
 	border-radius : 15px;
-	margin : 15px;
 	background-color : antiquewhite;
-}
-footer{
-	background-color : antiquewhite;
-	text-align : center;
-	margin : auto;
-	max-width : 100%;
-	height : 150px;
-	display : flex;
-	justify-content : space-around;
-}
-#ListeFooter{
-	max-width : 30%;
-	margin : auto;
-	display : flex;
-	flex-direction : column;
-	border : 1px solid black;
-	border-radius : 5px;
-}
-#LienExt{
-	width : 30%;
-	margin : auto;
-	display : flex;
-	flex-direction : column;
-	border : 1px solid black;
-	border-radius : 5px;
-}
-#Fb{
-	max-width : 50px;
-	max-height : 50px;
 }
 @media all and (max-width : 1100px)
 {

@@ -35,7 +35,7 @@ class ClientManager extends Manager
 		}
 		else
 		{
-			if ($isPasswordCorrect) {
+			if ($isPasswordCorrect){
 				$_SESSION['Id'] = $resultat['Id'];
 				$_SESSION['Pseudo'] = $_POST['Pseudo'];
 				$_SESSION['Droit'] = $resultat['Droit'];

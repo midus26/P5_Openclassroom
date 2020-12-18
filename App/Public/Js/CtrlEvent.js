@@ -9,6 +9,10 @@ class Ctrl{
 		let inputTexte = document.getElementById("Texte");
 		let btnSubmit = document.getElementById("AdminBtn");
 		
+		let inputsameImg = document.getElementById("sameImage");
+		let inputnotsameImg = document.getElementById("notsameImage");
+		let inputImage = document.getElementById("Image");
+		
 		btnSubmit.addEventListener("click",function (){
 			//Vérification des champs
 			if(inputaltImage.value == ""){
@@ -40,6 +44,18 @@ class Ctrl{
 			alert("L'heure de fin ne peus être antérieur à celle du début");
 			}
 		});
+		
+		if(inputsameImg != null){
+			if(inputsameImg.value = "Oui"){
+				inputImage.style.display = "none";
+			}
+			inputsameImg.addEventListener('click', function (){
+				inputImage.style.display = "none";
+			});
+			inputnotsameImg.addEventListener('click', function (){
+				inputImage.style.display = "flex";
+			});
+		}
 	};
 };
 let maCtrl = new Ctrl();
